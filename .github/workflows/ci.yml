@@ -27,7 +27,7 @@ jobs:
       - name: "Check node version"
         run: node --version
       - name: "Clone The Repository"
-        run: actions/setup-node@v2 
+        uses: actions/setup-node@v2 
       # Step 3: Install dependencies
     #   - name: "Install Dependencies"
     #     run: npm install
