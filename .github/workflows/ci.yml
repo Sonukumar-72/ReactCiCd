@@ -31,8 +31,8 @@ jobs:
 
       # Step 4: List files (for debugging purposes)
       - name: "List Directory"
-        run: ls -al
-        working-directory: ./ReactCiCd # Adjust if necessary
+        run: ls 
+        
 
       # Step 5: Run tests
       - name: "Run Tests"
