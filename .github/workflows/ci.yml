@@ -36,7 +36,7 @@ jobs:
 
       # Step 5: Run tests
       - name: "Run Tests"
-        run: npm test -- --watchAll=false
+        run: npm test -- --watchAll=true
         
 
       # Step 6: Build the React application (optional)
