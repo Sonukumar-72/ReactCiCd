@@ -37,7 +37,7 @@ jobs:
       # Step 5: Run tests
       - name: "Run Tests"
         run: npm test -- --watchAll=false
-        working-directory: ./ReactCiCd # Adjust if necessary
+        
 
       # Step 6: Build the React application (optional)
       - name: "Build Project"
