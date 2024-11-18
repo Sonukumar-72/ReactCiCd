@@ -5,10 +5,6 @@ on:
     branches:
       - main
       - master
-#   pull_request: # Optional: Trigger workflow for PRs
-#     branches:
-#       - main
-#       - master
 
 jobs:
   build-and-test:
@@ -16,28 +12,34 @@ jobs:
 
     steps:
       # Step 1: Checkout the code
-    #   - name: "Checkout Code"
-    #     uses: actions/checkout@v3
+      - name: "Checkout Code"
+        uses: actions/checkout@v3
 
       # Step 2: Setup Node.js environment
       - name: "Setup Node.js"
         uses: actions/setup-node@v2
         with:
           node-version: '14' # Specify the Node.js version
-      - name: "Check node version"
+
+      - name: "Check Node.js version"
         run: node --version
-      - name: "Clone The Repository"
-        uses: actions/setup-node@v2 
+
       # Step 3: Install dependencies
       - name: "Install Dependencies"
         run: npm install
-      - name: "List Directory"
-        run: ls  
+        working-directory: ./ReactCiCd # Adjust if necessary
 
-      # Step 4: Run tests
+      # Step 4: List files (for debugging purposes)
+      - name: "List Directory"
+        run: ls -al
+        working-directory: ./ReactCiCd # Adjust if necessary
+
+      # Step 5: Run tests
       - name: "Run Tests"
         run: npm test -- --watchAll=false
+        working-directory: ./ReactCiCd # Adjust if necessary
 
-      # Step 5: Build the React application (optional)
+      # Step 6: Build the React application (optional)
       - name: "Build Project"
         run: npm run build
+        working-directory: ./ReactCiCd # Adjust if necessary
