@@ -34,10 +34,10 @@ jobs:
       - name: "List Directory"
         run: ls  
 
-    #   # Step 4: Run tests
-    #   - name: "Run Tests"
-    #     run: npm test -- --watchAll=false
+      # Step 4: Run tests
+      - name: "Run Tests"
+        run: npm test
 
-    #   # Step 5: Build the React application (optional)
-    #   - name: "Build Project"
-    #     run: npm run build
+      # Step 5: Build the React application (optional)
+      - name: "Build Project"
+        run: npm run build
