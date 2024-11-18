@@ -29,8 +29,8 @@ jobs:
       - name: "Clone The Repository"
         uses: actions/setup-node@v2 
       # Step 3: Install dependencies
-    #   - name: "Install Dependencies"
-    #     run: npm install
+      - name: "Install Dependencies"
+        run: npm install
 
     #   # Step 4: Run tests
     #   - name: "Run Tests"
