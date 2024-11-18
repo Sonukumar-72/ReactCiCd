@@ -42,4 +42,4 @@ jobs:
       # Step 6: Build the React application (optional)
       - name: "Build Project"
         run: npm run build
-        working-directory: ./ReactCiCd # Adjust if necessary
+       
