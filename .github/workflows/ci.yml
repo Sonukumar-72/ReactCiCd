@@ -27,18 +27,19 @@ jobs:
       # Step 3: Install dependencies
       - name: "Install Dependencies"
         run: npm install
-        working-directory: ./ReactCiCd # Adjust to relative path
+       
 
       # Step 4: List files (for debugging purposes)
       - name: "List Directory"
-        run: ls -la # List all files, for debugging
+        run: ls 
+        
 
       # Step 5: Run tests
       - name: "Run Tests"
         run: npm test
-        working-directory: ./ReactCiCd # Adjust to relative path
+        working-directory:  /home/runner/work/ReactCiCd/ReactCiCd # Adjust if necessary
 
       # Step 6: Build the React application (optional)
       - name: "Build Project"
         run: npm run build
-        working-directory: ./ReactCiCd # Adjust to relative path
+        working-directory: ./ReactCiCd # Adjust if necessary
