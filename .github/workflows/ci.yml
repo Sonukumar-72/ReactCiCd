@@ -24,7 +24,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14' # Specify the Node.js version
-
+      - name: "Check node version"
+        run: node --version
       # Step 3: Install dependencies
     #   - name: "Install Dependencies"
     #     run: npm install
