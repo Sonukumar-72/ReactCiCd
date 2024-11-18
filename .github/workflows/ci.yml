@@ -26,6 +26,8 @@ jobs:
           node-version: '14' # Specify the Node.js version
       - name: "Check node version"
         run: node --version
+      - name: "Clone The Repository"
+        run: actions/setup-node@v2 
       # Step 3: Install dependencies
     #   - name: "Install Dependencies"
     #     run: npm install
