@@ -6,6 +6,7 @@ on:
       - "Simple React CI Pipeline / Workflow"
     types:
       - completed
+  workflow_dispatch: # Moved out of the `workflow_run` block as it's a separate trigger
 
 jobs: 
   deploy:
