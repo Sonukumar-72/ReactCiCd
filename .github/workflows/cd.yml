@@ -6,7 +6,7 @@ on:
       - "Simple React CI Pipeline / Workflow"
     types:
       - completed
-  workflow_dispatch: # Moved out of the `workflow_run` block as it's a separate trigger
+  workflow_dispatch:
 
 jobs: 
   deploy:
@@ -14,6 +14,9 @@ jobs:
     environment: production
 
     steps:
+      - name: Checkout code (optional if needed)
+        uses: actions/checkout@v3
+
       - name: "Setup Node.js"
         uses: actions/setup-node@v4
         with:
@@ -23,10 +26,9 @@ jobs:
         run: npm install -g vercel
 
       - name: "Download Build Files"
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: build
-          run-id: ${{ github.event.workflow_run.id }}
 
       - name: "Deploy to Vercel"
         run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --confirm --name=cicdproject
