@@ -13,29 +13,37 @@ jobs:
     steps:
       # Step 1: Checkout the code
       - name: "Checkout Code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Step 2: Setup Node.js environment
       - name: "Setup Node.js"
         uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '16' # Specify the Node.js version
+
+      - name: "Check Node.js version"
+        run: node --version
 
       # Step 3: Install dependencies
       - name: "Install Dependencies"
         run: npm install
+       
 
-      # Step 4: Build the React application
-      - name: "Build React App"
+      # Step 4: List files (for debugging purposes)
+      - name: "List Directory"
+        run: ls 
+        
+
+      # Step 5: Run tests
+      - name: "Run Tests"
+        run: npm test 
+
+      # Step 6: Build the React application (optional)
+      - name: "Run bulid"
         run: npm run build
 
-      # Step 5: Verify the build directory (debugging)
-      - name: "List Build Directory"
-        run: ls -l build
-
-      # Step 6: Upload product-ready build files
-      - name: "Upload Product-Ready Build Files"
-        uses: actions/upload-artifact@v3
+      - name: "uplode  product-ready build files"
+        uses: actions/upload-artifact@v4
         with:
           name: build
-          path: build  # Ensure this is the correct build directory
+          path: dist
