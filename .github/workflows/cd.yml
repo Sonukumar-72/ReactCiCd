@@ -1,9 +1,9 @@
-name: "CD pipeline"
+name: "CD Pipeline"
 
 on:
   workflow_run:
     workflows: 
-      - "Simple React CI Pipeline / Workflow"  # Matches the CI workflow name
+      - "Sample React CI Pipeline / Workflow"
     types:
       - completed
   workflow_dispatch:
@@ -14,19 +14,24 @@ jobs:
     environment: production
 
     steps:
-      # Debug: List available artifacts
-      - name: "List Artifacts (Debugging)"
-        run: gh api repos/${{ github.repository }}/actions/artifacts --jq '.artifacts[] | {name: .name, id: .id}'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Step 1: Setup Node.js
+      - name: "Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21'
 
-      # Download the build artifact
+      # Step 2: Setup Vercel CLI
+      - name: "Setup Vercel CLI"
+        run: npm install -g vercel
+
+      # Step 3: Download Build Files
       - name: "Download Build Files"
         uses: actions/download-artifact@v4
         with:
-          name: build  # Matches the artifact name in the CI workflow
-          path: dest # Optional: Specify where to extract the artifact
+          name: build
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
 
-      # Deploy to Vercel
+      # Step 4: Deploy to Vercel
       - name: "Deploy to Vercel"
-        run: npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --confirm
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --confirm --name=cicdproject
