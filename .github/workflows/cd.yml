@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout code (optional if needed)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Setup Node.js"
         uses: actions/setup-node@v4
@@ -26,7 +26,7 @@ jobs:
         run: npm install -g vercel
 
       - name: "Download Build Files"
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build
 
