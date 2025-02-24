@@ -1,9 +1,20 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18-alpine'
+            args '-u root' // Runs container as root (optional)
+        }
+    }
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
-                echo 'Hello World'
+                sh '''
+                ls -l 
+                node --version 
+                npm --version
+                npm install 
+                npm run build
+                '''
             }
         }
     }
