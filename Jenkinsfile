@@ -1,40 +1,26 @@
-
 pipeline {
-    agent {
-        docker {
-            image 'node:18-alpine'
-            args '-u root' // Runs container as root (optional)
-        }
-    }
+    agent none // Don't use a default agent
     stages {
-        stage('Cleanup') {
-            steps {
-                cleanWs() // Clean workspace
-            }
-        }
-        stage('Checkout Code') {  // 🛠️ Ensure repo is available after cleanup
+        stage('Checkout Code') {
+            agent { label 'master' }  // Run checkout on the Jenkins master node
             steps {
                 checkout scm
-                sh 'ls -l' // Debugging: Check if package.json is present
             }
         }
-        stage('Install Dependencies') {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    args '-u root'
+                }
+            }
             steps {
                 sh '''
                 node --version
                 npm --version
                 npm install
+                npm run build
                 '''
-            }
-        }
-        stage('Build Project') {
-            steps {
-                sh 'npm run build'
-            }
-        }
-        stage('List Build Files') {
-            steps {
-                sh 'ls -l'
             }
         }
     }
