@@ -6,15 +6,28 @@ pipeline {
         }
     }
     stages {
-        stage('Build') {
+        stage('Cleanup') {
+            steps {
+                cleanWs() // Clean workspace before starting
+            }
+        }
+        stage('Install Dependencies') {
             steps {
                 sh '''
-                ls -l 
-                node --version 
+                node --version
                 npm --version
-                npm install 
-                npm run build
+                npm install
                 '''
+            }
+        }
+        stage('Build Project') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+        stage('List Build Files') {
+            steps {
+                sh 'ls -l'
             }
         }
     }
