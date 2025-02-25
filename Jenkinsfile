@@ -1,3 +1,4 @@
+
 pipeline {
     agent {
         docker {
@@ -8,7 +9,13 @@ pipeline {
     stages {
         stage('Cleanup') {
             steps {
-                cleanWs() // Clean workspace before starting
+                cleanWs() // Clean workspace
+            }
+        }
+        stage('Checkout Code') {  // 🛠️ Ensure repo is available after cleanup
+            steps {
+                checkout scm
+                sh 'ls -l' // Debugging: Check if package.json is present
             }
         }
         stage('Install Dependencies') {
